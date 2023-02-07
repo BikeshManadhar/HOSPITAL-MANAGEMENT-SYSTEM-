@@ -1,0 +1,272 @@
+<?php 
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
+
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HOSPITAL MANAGEMENT SYSTEM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style3.css">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+body{
+  background-color:grey;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.hero p{
+      text-align: center;
+      font-size: 50px;
+      color: white;
+      position: relative;
+      left:-430px;
+    
+  }
+    
+  /*login box*/
+  body{
+      background-color: gray;
+  }
+  .topnav {
+  overflow: hidden;
+  background-color: #333;
+  padding:0px;
+  postion:relative;
+  top:-30px;
+}
+  .hero{
+      
+      height: 50%;
+      width: 100%;
+      overflow: hidden;
+  }
+  .hero p{
+      text-align: center;
+      font-size: 50px;
+      color: white;
+      position: relative;
+      left:-380px;
+    
+  }
+  .form-box{
+      width: 380px;
+      height: 300px;
+      position: relative;
+      margin: 6% auto;
+      background-color:red;
+      padding: 5px;
+      overflow: hidden;
+      border-radius: 30px;
+      top: -55px;
+      left: -480px;
+  }
+
+  .button-box{
+      width: 220px;
+      margin: 35px auto;
+      position: relative;
+      border-radius: 30px;
+  }
+ 
+  ::placeholder{
+	
+	color: black;
+	font-size:17px;
+}
+div,.input-group{
+        position: relative;
+        top: -10px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        
+        
+}
+
+  .input-field{
+      width: 100%;
+      padding: 10px 0;
+      margin: 5px 0;
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;	
+      border-bottom: 3px solid  black;
+      outline: none;
+      background: transparent;
+     
+      font-size: 17px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      
+  
+  }
+  .DD{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color: blue;
+  }
+  .gender{
+   position: relative;
+   left: 0px;
+   margin: 5px;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   	
+   
+    
+   
+    color: black;
+  }
+  .submit-btn{
+      width: 65%;
+      padding: 15px 30px;
+      position: relative;
+      top: -30px;  
+      left: 40px;
+      background: linear-gradient(to right, #ff105f, #ffad06);
+      border: 0;
+      outline: none;
+      border-radius: 30px;	
+      font-size: 16px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      
+  }
+
+  .check-box{
+      margin: 30px 10px 30px 0;
+      
+  }
+  .table{
+    position: relative;
+    top:-400px;
+    left:600px;
+    width:%;
+  }
+
+
+th, td {
+  text-align: left;
+
+}
+th {
+  background-color: #04AA6D;
+  color: blue;
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="row">
+  <div class="column">
+    <img src="med.jpg" alt="Snow" style="width:100%;height:294px;">
+  </div>
+  <div class="column">
+    <img src="med1.jpg" alt="Forest" style="width:100%; height:294px;">
+  </div>
+  <div class="column">
+    <img src="med2.jpg" alt="Mountains" style="width:100%;  height:294px;">
+  </div>
+</div>
+
+
+<div class="topnav">
+
+<a class="active" href="username1.php">DOCTORS DETAILS</a>
+<a href="PATIENTS.php">PATIENTS  DETAILS</a>
+  <a href="STAFF.php">STAFF DETAILS</a>
+  <a href="OPERATINGTHEATER.php">OPERATING THEATER DETAILS</a>
+  <a href="ROOMANDWARD.php">ROOM DETAILS </a>
+  <a href="WARD.php">WARD DETAILS</a>
+  <a href="MEDRECORD.php">MEDICAL RECORD</a>
+  <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</div>
+
+
+<!--patient details-->
+<div class="hero">
+        	<p>MEDICAL RECORDS</p>
+      		<div class="form-box">
+      			<div class="button-box">
+      				
+	      		<form id="login" class="input-group" action="add6.php" method="post">
+	      			<input type="text" name="med_type" class="input-field" placeholder="Medical Type:"  required>
+	      			<input type="text" name="prescription" class="input-field" placeholder="Prescription:" required>
+              <input type="text" name="patient_id" class="input-field" placeholder="Patient ID" required>
+
+	      			<br>
+					  <br>
+					  <br>
+          
+           <br>
+					  
+	      			<button type="submit" class="submit-btn">Submit</button>
+	
+              </div>
+              </div>
+              </div>
+          </form>
+
+          <div>
+		<table class="table" border="1">
+			<thead>
+      <th>ID</th>
+				<th>Med_type</th>
+				<th>Prescription</th>
+        <th>Patient Id</th>
+        <th>Action</th>
+     
+			</thead>
+			<tbody>
+				<?php
+					include('conn.php');
+					$query=mysqli_query($conn,"select * from `medrecord`");
+					while($row=mysqli_fetch_array($query)){
+						?>
+						<tr>
+            <td><?php echo $row['med_id']; ?></td>
+							<td><?php echo $row['med_type']; ?></td>
+							<td><?php echo $row['prescription']; ?></td>
+              <td><?php echo $row['patient_id']; ?></td>
+							<td>
+								<a href="edit6.php?id=<?php echo $row['med_id']; ?>">Edit</a>
+								<a href="delete6.php?id=<?php echo $row['med_id']; ?>">Delete</a>
+							</td>
+						</tr>
+						<?php
+					}
+				?>
+			</tbody>
+		</table>
+    <a style="position:relative; top:-100px; left:600px; font-size:27px; color:blue;" href="logout.php">logout</a>
+</body>
+</html>
+<?php 
+
+}else{
+
+     header("Location: LOGIN.php");
+
+     exit();
+
+}
+
+ ?>

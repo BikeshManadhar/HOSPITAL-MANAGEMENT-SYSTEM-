@@ -1,0 +1,45 @@
+<div>
+		<table border="1">
+			<thead>
+      <th>ID</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Room.no</th>
+        <th>Phone.no</th>
+        <th>Admission Date</th>
+        <th>Discharge Date</th>
+        <th>Diagnosis</th>
+        <th>Gender</th>
+        <th>action</th>
+			</thead>
+			<tbody>
+				<?php
+					include('conn.php');
+					$query=mysqli_query($conn,"select * from `patient`");
+					while($row=mysqli_fetch_array($query)){
+						?>
+						<tr>
+            <td><?php echo $row['id']; ?></td>
+							<td><?php echo $row['fname']; ?></td>
+							<td><?php echo $row['lname']; ?></td>
+              <td><?php echo $row['age']; ?></td>
+              <td><?php echo $row['address']; ?></td>
+              <td><?php echo $row['room_no']; ?></td>
+              <td><?php echo $row['phone_no']; ?></td>
+              <td><?php echo $row['admission_date']; ?></td>
+              <td><?php echo $row['discharge_date']; ?></td>
+              <td><?php echo $row['diagnosis']; ?></td>
+              <td><?php echo $row['gender']; ?></td>
+							<td>
+								<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
+								<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+							</td>
+						</tr>
+						<?php
+					}
+				?>
+			</tbody>
+		</table>
+	</div>
